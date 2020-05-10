@@ -7,32 +7,33 @@
 
 using namespace std;
 
-class Input {
+static class Input {
 public:
 	Input();
 	~Input();
 	// Input Handling
-	void PressKey(unsigned int keyID);
-	void ReleaseKey(unsigned int keyID);
-	void SetMouseCoords(float x, float y);
+	static void PressKey(unsigned int keyID);
+	static void ReleaseKey(unsigned int keyID);
+	static void SetMouseCoords(float x, float y);
 	// Returns true if the key is held down
-	bool GetKeyDown(string name);
+	static bool GetKeyDown(string name);
 	// Returns true if the key was just pressed
-	bool GetKeyUp(string name);
+	static bool GetKeyUp(string name);
 	// getters
-	glm::vec2 GetMouseCoords() const { return _mouseCoords; }
+	static glm::vec2 GetMouseCoords(){ return _mouseCoords; }
 	// Returns true if the key is held down
-	bool GetKey(string name);
+	static bool GetKey(string name);
 
-	Settings::State GetState();
+	static Settings::State GetState();
 
-	void InputMapping(string mappingName, unsigned int keyId);
+	static void InputMapping(string mappingName, unsigned int keyId);
 
-	void PollInput();
+	static void PollInput();
 private:
-	unordered_map<unsigned int, string> _mapNames;
-	unordered_map<string, bool> _keyMap;
-	unordered_map<string, bool> _previousKeyMap;
-	glm::vec2 _mouseCoords;
-	Settings::State state;
+	static unordered_map<unsigned int, string> _mapNames;
+	static unordered_map<string, bool> _keyMap;
+	static unordered_map<string, bool> _previousKeyMap;
+	static unordered_map<string, int> _flagKeyMap; //0 KeyDown, 1 KeyUp , -1 normal
+	static glm::vec2 _mouseCoords;
+	static Settings::State state;
 };

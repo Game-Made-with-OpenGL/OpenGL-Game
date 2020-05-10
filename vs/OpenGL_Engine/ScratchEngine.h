@@ -15,6 +15,7 @@
 
 #include "Input.h"
 #include "Time.h"
+#include "Window.h"
 
 using namespace std;
 using namespace glm;
@@ -30,17 +31,14 @@ namespace Engine {
 		void Start(string title, unsigned int width, unsigned int height, bool vsync, WindowFlag windowFlag, unsigned int targetFrameRate, float timeScale);
 		
 		State state;
-		Input input;
 
 	protected:
 		virtual void Init() = 0;
 		virtual void Update() = 0;
 		virtual void Render() = 0;
-		unsigned int GetScreenHeight();
-		unsigned int GetScreenWidth();
 	
 	private:
-		unsigned int screenWidth, screenHeight, last = 0, _fps = 0, fps = 0;
+		unsigned int last = 0, _fps = 0, fps = 0;
 		float targetFrameTime = 0;
 		void GetFPS();
 		void Err(string errorString);

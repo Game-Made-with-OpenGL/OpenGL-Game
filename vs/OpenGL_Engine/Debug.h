@@ -14,6 +14,10 @@ public :
 		SDL_Quit();
 		exit(1);
 	}
+
+	static void Log(string message) {
+		cout << message << endl;
+	}
 };
 
 #endif

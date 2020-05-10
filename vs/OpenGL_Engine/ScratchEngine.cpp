@@ -22,8 +22,8 @@ void ScratchEngine::Start(string windowTitle, unsigned int screenWidth, unsigned
 	//Tell SDL that we want a double buffered window so we don't get any flickering
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-	this->screenWidth = screenWidth;
-	this->screenHeight = screenHeight;
+	Window::SetScreenWidth(screenWidth);
+	Window::SetScreenHeight(screenHeight);
 	Time::timeScale = timeScale;
 
 	if (targetFrameRate > 0) {
@@ -77,7 +77,7 @@ void ScratchEngine::Start(string windowTitle, unsigned int screenWidth, unsigned
 	while (State::RUNNING == state) {
 		Time::CalculateTime();
 		GetFPS();
-		input.PollInput();
+		Input::PollInput();
 		Update();
 		Render();
 		SDL_GL_SwapWindow(window);
@@ -123,14 +123,3 @@ void ScratchEngine::LimitFPS()
 	SDL_Delay((Uint32)(targetFrameTime));
 
 }
-
-unsigned int ScratchEngine::GetScreenHeight() {
-	return this->screenHeight;
-}
-
-unsigned int ScratchEngine::GetScreenWidth() {
-	return this->screenWidth;
-}
-
-
-

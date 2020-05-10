@@ -19,16 +19,31 @@
     <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{fb22764c-b0a5-41f0-9d4b-6f4bae475e56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine\Object">
+      <UniqueIdentifier>{62655dc1-ce1d-4a8e-83ab-6cf008adb976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Debug">
+      <UniqueIdentifier>{5693b702-eadc-4928-bed2-107bf5839259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Object">
+      <UniqueIdentifier>{b53b0207-65ec-426d-9557-2be930e66f44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameScript">
+      <UniqueIdentifier>{7a949259-23b1-4228-9e88-555c55c6927c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameScript">
+      <UniqueIdentifier>{db822d4d-a032-457b-873a-d9369f0b3c90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameScript\Character">
+      <UniqueIdentifier>{1db06783-0cf2-42c3-9084-93beda15d609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameScript\Character">
+      <UniqueIdentifier>{374662dd-96de-4dbb-9674-b45a4a8b4a2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TurnBasedGame.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Engine</Filter>
@@ -45,7 +60,25 @@
     <ClInclude Include="Time.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Header Files\Engine\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\Engine\Object</Filter>
+    </ClInclude>
     <ClInclude Include="Transform.h">
+      <Filter>Header Files\Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterBehaviour.h">
+      <Filter>Header Files\GameScript\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterController.h">
+      <Filter>Header Files\GameScript\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
@@ -66,9 +99,6 @@
     <ClCompile Include="TurnBasedGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
@@ -82,6 +112,21 @@
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterBehaviour.cpp">
+      <Filter>Source Files\GameScript\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterController.cpp">
+      <Filter>Source Files\GameScript\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>

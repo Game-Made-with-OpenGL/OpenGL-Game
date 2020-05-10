@@ -1,5 +1,7 @@
 #include "Input.h"
 
+#include <iostream>
+
 Input::Input() {
 
 }
@@ -15,6 +17,7 @@ void Input::PressKey(unsigned int keyID) {
 	if (it != _mapNames.end()) {
 		string mapName = it->second;
 		_keyMap[mapName] = true;
+		if (!_previousKeyMap[mapName]) _previousKeyMap[mapName] = false;
 	}
 }
 
@@ -23,6 +26,10 @@ void Input::ReleaseKey(unsigned int keyID) {
 	if (it != _mapNames.end()) {
 		string mapName = it->second;
 		_keyMap[mapName] = false;
+
+		if (_flagKeyMap[mapName] == 0) _previousKeyMap[mapName] = false;
+
+		_flagKeyMap[mapName] = -1;
 	}
 }
 
@@ -31,13 +38,15 @@ void Input::SetMouseCoords(float x, float y) {
 	_mouseCoords.y = y;
 }
 
-// Returns true if the key is held down
+// Returns true if the key is press down, and return false after that until it realese
 bool Input::GetKeyDown(string name) {
-	// We dont want to use the associative array approach here
-	// because we don't want to create a key if it doesnt exist.
-	// So we do it manually
+	if (!_flagKeyMap[name] || _flagKeyMap[name] == -1) _flagKeyMap[name] = 0;
+
 	auto it = _keyMap.find(name);
-	if (it != _keyMap.end()) {
+	auto lastInput = _previousKeyMap.find(name);
+	if (it != _keyMap.end() && lastInput != _previousKeyMap.end() && it->second != lastInput->second) {
+		_previousKeyMap[name] = true;
+		
 		// Found the key
 		return it->second;
 	}
@@ -47,12 +56,16 @@ bool Input::GetKeyDown(string name) {
 	}
 }
 
-// Returns true if the key was just pressed
+// Returns true if the key is release from the press
 bool Input::GetKeyUp(string name) {
+	if (!_flagKeyMap[name] || _flagKeyMap[name] == -1) _flagKeyMap[name] = 1;
+
 	// Check if it is pressed this frame, and wasn't pressed last frame
-	if (GetKeyDown(name) == true && GetKey(name) == false) {
+	if (GetKeyDown(name) == false && GetKey(name) == false && _previousKeyMap[name] ) {
+		_previousKeyMap[name] = false;
 		return true;
 	}
+
 	return false;
 }
 
@@ -61,8 +74,8 @@ bool Input::GetKey(string name) {
 	// We dont want to use the associative array approach here
 	// because we don't want to create a key if it doesnt exist.
 	// So we do it manually
-	auto it = _previousKeyMap.find(name);
-	if (it != _previousKeyMap.end()) {
+	auto it = _keyMap.find(name);
+	if (it != _keyMap.end()) {
 		// Found the key
 		return it->second;
 	}
@@ -119,3 +132,10 @@ void Input::PollInput() {
 Settings::State Input::GetState() {
 	return state;
 }
+
+unordered_map<unsigned int, string> Input::_mapNames;
+unordered_map<string, bool> Input::_keyMap;
+unordered_map<string, bool> Input::_previousKeyMap;
+unordered_map<string, int> Input::_flagKeyMap;
+glm::vec2 Input::_mouseCoords;
+Settings::State Input::state;
