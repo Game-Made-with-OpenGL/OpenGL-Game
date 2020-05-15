@@ -2,6 +2,7 @@
 #define OBJECTRENDER_H
 
 #include "CharacterController.h"
+#include "StaticObject.h"
 
 class Scene {
 public:
@@ -13,5 +14,6 @@ public:
 
 private:
 	CharacterController player;
+	StaticObject object;
 };
 #endif

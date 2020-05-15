@@ -18,6 +18,7 @@ void Transform::Rotate(glm::vec3 direction, float angle) {
 }
 
 void Transform::Scale(glm::vec3 scale) {
+	cout << scale.x << " - " << scale.y;
 	this->scale = scale;
 }
 

@@ -40,7 +40,33 @@ void GameObject::BuildObject(GLfloat vertices[], GLuint verticesSize , GLuint in
 }
 
 void GameObject::Render() {
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	// Bind Textures using texture units
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, spritesheet.GetTextureID());
+
 	shader.UseShader();
+	transform.Execute(shader);
+	glUniform1f(glGetUniformLocation(shader.GetShaderID(), "n"), 1.0f / spritesheet.MAX_NUMBER_OF_FRAME_WIDTH);
+	glUniform1f(glGetUniformLocation(shader.GetShaderID(), "m"), 1.0f / spritesheet.MAX_NUMBER_OF_FRAME_HEIGHT);
+
+	// Draw sprite
+	glBindVertexArray(GetVAO());
+	glDrawElements(GL_QUADS, 4, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+
+	glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture when done, so we won't accidentily mess up our texture.
+	glDisable(GL_BLEND);
+}
+
+void GameObject::Animate(string animState) {
+	spritesheet.Animate(animState);
+	Render();
+	glUniform1i(glGetUniformLocation(shader.GetShaderID(), "frameIndexX"), spritesheet.frame_idx);
+	glUniform1i(glGetUniformLocation(shader.GetShaderID(), "frameIndexY"), spritesheet.frame_idy);
 }
 
 GLuint GameObject::GetObjectShaderID() {
@@ -57,4 +83,8 @@ GLuint GameObject::GetVBO() {
 
 GLuint GameObject::GetEBO() {
 	return EBO;
+}
+
+void GameObject::ApplyTexture(const char* path, unsigned int count_frame_width, unsigned int count_frame_height) {
+	spritesheet = SpriteRender(path, count_frame_width, count_frame_height);
 }

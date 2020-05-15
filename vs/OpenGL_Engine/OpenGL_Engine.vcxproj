@@ -123,14 +123,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="CharacterBehaviour.h" />
     <ClInclude Include="CharacterController.h" />
+    <ClInclude Include="CharacterInfo.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="SpriteRender.h" />
+    <ClInclude Include="StaticObject.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TurnBasedGame.h" />
@@ -138,19 +143,29 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="background\1_game_background.png" />
+    <Image Include="background\2_game_background.png" />
+    <Image Include="background\3_game_background.png" />
+    <Image Include="background\4_game_background.png" />
     <Image Include="homeranim.png" />
+    <Image Include="spritesheet\playerspritesheet.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="background.frag" />
+    <None Include="background.vert" />
     <None Include="spriteAnim.frag" />
     <None Include="spriteAnim.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CharacterBehaviour.cpp" />
     <ClCompile Include="CharacterController.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SpriteRender.cpp" />
+    <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TurnBasedGame.cpp" />

@@ -9,7 +9,7 @@ void CharacterController::Update() {
 	CharacterBehaviour::Update();
 
 	Controller();
-	UpdateSpriteAnim(Time::deltaTime);
+	UpdateSpriteAnim();
 }
 
 void CharacterController::Render(){
@@ -41,13 +41,13 @@ void CharacterController::ControlPlayerSprite(float deltaTime)
 
 	if (Input::GetKey("Move Right")) {
 		xpos += deltaTime * xVelocity;
-		flip = 0;
+		player.spritesheet.flipX = 0;
 		walk_anim = true;
 	}
 
 	if (Input::GetKey("Move Left")) {
 		xpos -= deltaTime * xVelocity;
-		flip = 1;
+		player.spritesheet.flipX = 1;
 		walk_anim = true;
 	}
 
@@ -56,6 +56,10 @@ void CharacterController::ControlPlayerSprite(float deltaTime)
 			yVelocity = -12.0f;
 			onGround = false;
 		}
+	}
+
+	if (Input::GetKeyDown("Attack")) {
+		player.spritesheet.SetActiveAnimation("Attack");
 	}
 
 	if (Input::GetKeyUp("Jump")) {
@@ -74,12 +78,7 @@ void CharacterController::ControlPlayerSprite(float deltaTime)
 	}
 
 
-	glUniform1i(glGetUniformLocation(player.GetObjectShaderID(), "flip"), flip);
+	glUniform1i(glGetUniformLocation(player.GetObjectShaderID(), "flip"), 0);
 
-	mat4 model;
-	// Translate sprite along x-axis
-	model = translate(model, vec3(xpos, ypos, 0.0f));
-	// Scale sprite 
-	model = scale(model, vec3(frame_width, frame_height, 1));
-	glUniformMatrix4fv(glGetUniformLocation(player.GetObjectShaderID(), "model"), 1, GL_FALSE, value_ptr(model));
+	player.transform.SetPosition(vec3(xpos, ypos, 0.0f));
 }

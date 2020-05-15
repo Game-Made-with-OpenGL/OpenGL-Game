@@ -4,7 +4,9 @@ layout (location = 1) in vec3 color;
 layout (location = 2) in vec2 texCoord;
 
 uniform float n = 1.0f;
-uniform int frameIndex = 0;
+uniform float m = 1.0f;
+uniform int frameIndexX = 0;
+uniform int frameIndexY = 0;
 uniform mat4 model;
 uniform mat4 projection;
 uniform int flip = 0;
@@ -18,7 +20,7 @@ void main()
 	ourColor = color;
 	// We do not need to swap the y-axis by substracing our coordinates from 1. Because we match y-axis on the orthographic projection with y-axis on the image.
     if(flip == 1)
-		TexCoord = vec2(1.0f - (n * (texCoord.x + frameIndex)), texCoord.y);
+		TexCoord = vec2(1.0f - (n * (texCoord.x + frameIndexX)), (m * (texCoord.y + frameIndexY)));
     else
-		TexCoord = vec2((n * (texCoord.x + frameIndex)), texCoord.y);
+		TexCoord = vec2((n * (texCoord.x + frameIndexX)), (m * (texCoord.y + frameIndexY)));
 }
