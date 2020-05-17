@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #include "TurnBasedGame.h"
+#include "CharacterInfo.h"
 
 class Enemy {
 public :
@@ -13,9 +14,12 @@ public :
 	void Deffend();
 	void Run();
 
+	void MadeChoice();
+
 	void TakeDamage(int damage);
 
 	GameObject enemy;
+	CharacterInfo info;
 
 protected:
 	void BuildEnemySprite();

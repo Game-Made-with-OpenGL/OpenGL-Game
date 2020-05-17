@@ -10,11 +10,15 @@ public:
 
 	void Init();
 	void Render();
+	void LateRender();
 	void Update();
 
+	GameObject transparentPanel;
 private:
 	GameObject background;
+	
 	void CreateBackground();
+	void CreateTransparent();
 };
 
 #endif

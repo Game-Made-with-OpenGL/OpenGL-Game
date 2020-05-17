@@ -68,7 +68,7 @@ void TurnBasedGame::InputMapping() {
 int main(int argc, char** argv) {
 	TurnBasedGame tbg = TurnBasedGame();
 	Engine::ScratchEngine &game = tbg;
-	game.Start("Test", 1280, 720, false, WindowFlag::WINDOWED, 60, 1);
+	game.Start("Les Plague", 1280, 720, false, WindowFlag::WINDOWED, 60, 1);
 
 	return 0;
 }

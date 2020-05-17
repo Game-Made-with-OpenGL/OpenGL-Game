@@ -1,10 +1,27 @@
 #include "CharacterBehaviour.h"
 #include "Debug.h"
+#include "Scene.h"
+#include <time.h>  
+
+CharacterBehaviour::CharacterBehaviour() {
+
+}
+
+CharacterBehaviour::~CharacterBehaviour() {
+
+}
 
 void CharacterBehaviour::Init() {
 	
 	player = GameObject();
 	BuildPlayerSprite();
+	int hp = 120;
+	int attack = 11;
+	int deffend = 6;
+	info = CharacterInfo(hp, attack, deffend);
+
+	Scene::UIInstance.UpdateHP(CharacterType::PLAYER, info.hp);
+	srand(time(NULL));
 }
 
 void CharacterBehaviour::Render() {
@@ -16,19 +33,55 @@ void CharacterBehaviour::Update() {
 }
 
 void CharacterBehaviour::Attack() {
-	Debug::Log("Attack");
+	Scene::AudioInstance.PlaySFX("Attack");
+	Scene::UIInstance.ActiveVFX("Attack", CharacterType::PLAYER, glm::vec3(0, 1, 0));
+	info.status = Status::ATTACK;
+
+	Scene::sequenceInstance.enemy->TakeDamage(rand() % info.attack + 1);
+	Scene::sequenceInstance.turnTake = true;
+	inTurn = false;
 }
 
 void CharacterBehaviour::Deffend() {
-	Debug::Log("Deffend");
+	Scene::UIInstance.ActiveVFX("Defend", CharacterType::PLAYER, glm::vec3(0, 1, 0));
+	info.status = Status::DEFFEND;
+	Scene::sequenceInstance.turnTake = true;
+	inTurn = false;
 }
 
 void CharacterBehaviour::Run() {
 	Debug::Log("Run");
+	info.status = Status::RUN;
+	Scene::sequenceInstance.turnTake = true;
+	inTurn = false;
 }
 
 void CharacterBehaviour::TakeDamage(int damage) {
-	Debug::Log(string("Ouch Take ") + to_string(damage) + string(" hit"));
+	Scene::AudioInstance.PlaySFX("Hurt");
+	player.spritesheet.SetActiveAnimation("Hurt");
+	int takeDamage = 0;
+
+	if (info.status == Status::DEFFEND) {
+		takeDamage =  damage - (rand() % info.deffend + 1);
+		if (takeDamage < 0) takeDamage = 0;
+	}
+	else {
+		takeDamage = damage;
+	}
+
+	info.hp -= takeDamage;
+
+	if (info.hp <= 0) {
+		Scene::AudioInstance.PlaySFX("Death");
+		info.hp = 0;
+		player.spritesheet.SetBaseAnimation("Death");
+		player.spritesheet.SetActiveAnimation("Death");
+		Scene::sequenceInstance.gameOver = true;
+		Scene::UIInstance.SetPlayerWin("Enemy Win");
+	}
+
+	Scene::UIInstance.ActiveVFX("-" + to_string(takeDamage) + " HP", CharacterType::PLAYER, glm::vec3(1, 0, 0));
+	Scene::UIInstance.UpdateHP(CharacterType::PLAYER, info.hp);
 }
 
 void CharacterBehaviour::UpdateSpriteAnim()
@@ -50,6 +103,8 @@ void CharacterBehaviour::BuildPlayerSprite()
 	player.spritesheet.SetBaseAnimation("Idle");
 
 	player.spritesheet.SetAnimationState("Attack", 80, 4, 0, false);
+	player.spritesheet.SetAnimationState("Death", 60, 6, 1, false);
+	player.spritesheet.SetAnimationState("Hurt", 160, 2, 2, false);
 
 	
 	GLfloat vertices[] = {
@@ -76,9 +131,15 @@ void CharacterBehaviour::BuildPlayerSprite()
 
 	// set sprite position, gravity, velocity
 	//xpos = (Window::GetScreenWidth() - player.spritesheet.GetWidth());
-	xpos = -30;
+	xpos = 0;
 	yposGround = Window::GetScreenHeight() - (player.spritesheet.GetHeight() + 140);
 	ypos = yposGround;
 	gravity = 0.05f;
 	xVelocity = 0.1f;
+
+	player.transform.SetPosition(glm::vec3(xpos, ypos, 0));
+}
+
+void CharacterBehaviour::MadeChoice() {
+	inTurn = true;
 }

@@ -56,7 +56,11 @@ void SpriteRender::Animate(string nameState) {
 		frame_dur = 0;
 		if (frame_idx == activeAnimation.NUMBER_OF_FRAME - 1) {
 			if (activeAnimation.loop) frame_idx = 0;
-			else SetActiveAnimation(baseAnimation.name);
+			else {
+				if (activeAnimation.name != baseAnimation.name) {
+					SetActiveAnimation(baseAnimation.name);
+				}
+			}
 		}
 		else {
 			frame_idx++;

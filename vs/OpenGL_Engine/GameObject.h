@@ -22,6 +22,7 @@ public:
 	GLuint GetEBO();
 	void ApplyTexture(const char* path, unsigned int count_frame_width = 1, unsigned int count_frame_height = 1);
 	void Animate(string animState);
+	bool activeSelf;
 private:
 	GLuint VAO, VBO, EBO;
 };

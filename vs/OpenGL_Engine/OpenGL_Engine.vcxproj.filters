@@ -69,9 +69,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TurnBasedGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
@@ -123,6 +120,21 @@
     <ClInclude Include="CharacterInfo.h">
       <Filter>Header Files\GameScript\Character</Filter>
     </ClInclude>
+    <ClInclude Include="SequenceManager.h">
+      <Filter>Header Files\GameScript</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TurnBasedGame.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Header Files\GameScript</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="homeranim.png">
@@ -156,6 +168,12 @@
     </None>
     <None Include="background.frag">
       <Filter>Resource Files\Shader\Background</Filter>
+    </None>
+    <None Include="textVertex.vert">
+      <Filter>Resource Files\Shader</Filter>
+    </None>
+    <None Include="textFragment.frag">
+      <Filter>Resource Files\Shader</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +218,18 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\GameScript\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SequenceManager.cpp">
+      <Filter>Source Files\GameScript</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Source Files\GameScript</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

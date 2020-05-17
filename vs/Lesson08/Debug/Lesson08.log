@@ -1,4 +1,0 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Lesson03.vcxproj, Lesson04.vcxproj, Lesson05.vcxproj, Lesson06.vcxproj, Lesson07.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Demo.cpp
-E:\Game Development\ScratchCpp\OpenGL-Game\vs\Lesson08\Demo.cpp(124,24): warning C4838: conversion from 'FT_Pos' to 'GLuint' requires a narrowing conversion
-  Lesson08.vcxproj -> E:\Game Development\ScratchCpp\OpenGL-Game\vs\Debug\Lesson08.exe

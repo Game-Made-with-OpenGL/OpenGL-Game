@@ -6,6 +6,8 @@
 
 class CharacterController : public CharacterBehaviour {
 public:
+	CharacterController();
+	~CharacterController();
 	void Init() override;
 	void Update() override;
 	void Render() override;

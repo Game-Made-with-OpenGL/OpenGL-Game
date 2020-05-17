@@ -17,6 +17,7 @@ void Shader::BuildShader(const char* vertexPath, const char* fragmentPath, const
 	ifstream vShaderFile;
 	ifstream fShaderFile;
 	ifstream gShaderFile;
+
 	// ensures ifstream objects can throw exceptions:
 	vShaderFile.exceptions(ifstream::failbit | ifstream::badbit);
 	fShaderFile.exceptions(ifstream::failbit | ifstream::badbit);
